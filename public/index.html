@@ -1,33 +1,235 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CSS/HTML Workshop with Drivy</title>
-  </head>
-  <body>
-    <div id="car">
-      <input class="model" type="text" placeholder="Car model"/>
-      <input class="price-by-day" type="number" placeholder="Price by day"/>
-      <input class="price-by-km" type="number" placeholder="Price by km"/>
-    </div>
-    <div id="rental">
-      <input class="begin" type="date" placeholder="Rental begin date"/>
-      <input class="end" type="date" placeholder="Rental end date"/>
-      <input class="distance" type="number" placeholder="Distance in km"/>
-      <input class="option" type="checkbox" placeholder="Deductible option"/>
-    </div>
-    <button id="compute">Compute</button>
-    <div id="actors"></div>
-    <script id="template" type="x-tmpl-mustache">
-      {{#actors}}
-        <div class="actor">
-          <span>{{who}}</span>
-          <span>{{type}}</span>
-          <span>{{amount}}</span>
+<head>
+  <title>CSS/HTML Workshop with Drivy</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_green-red.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <style type=text/css>
+    .mdl-cell {
+      min-width: 130px;
+    }
+    .mdl-select {
+      position: relative;
+      font-size: 16px;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 300px;
+      max-width: 100%;
+      margin: 0;
+      padding: 20px 0;
+    }
+
+    .mdl-select__input {
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0, 0.12);
+      display: inline-block;
+      font-size: 16px;
+      margin: 0;
+      padding: 4px 0;
+      width: 100%;
+      background: 16px;
+      text-align: left;
+      color: inherit;
+    }
+
+    .mdl-select.is-focused .mdl-select__input { outline: none; }
+    .mdl-select.is-invalid .mdl-select__input { 
+      border-color: rgb(222, 50, 38);
+      box-shadow: none;
+    }
+
+    .mdl-select.is-disabled .mdl-select__input {
+      background-color: transparent;
+      border-bottom: 1px dotted rgba(0,0,0, 0.12);
+    }
+
+    .mdl-select__label {
+      bottom: 0;
+      color: rgba(0,0,0, 0.26);
+      font-size: 16px;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 24px;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: left; 
+    }
+
+    .mdl-select.is-dirty .mdl-select__label { visibility: hidden; }
+
+    .mdl-select--floating-label .mdl-textfield__label {
+      -webkit-transition-duration: 0.2s;
+      transition-duration: 0.2s;
+      -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mdl-select--floating-label.is-focused .mdl-select__label,
+    .mdl-select--floating-label.is-dirty .mdl-select__label {
+      color: rgb(63,81,181);
+      font-size: 12px;
+      top: 4px;
+      visibility: visible;
+    }
+
+    .mdl-select--floating-label.is-focused .mdl-select__expandable-holder .mdl-select__label,
+    .mdl-select--floating-label.is-dirty .mdl-select__expandable-holder .mdl-select__label {
+      top: -16px;
+    }
+
+    .mdl-select--floating-label.is-invalid .mdl-select__label {
+      color: rgb(222, 50, 38);
+      font-size: 12px;
+    }
+
+    .mdl-select__label:after {
+      background-color: rgb(63,81,181);
+      bottom: 20px;
+      content: '';
+      height: 2px;
+      left: 45%;
+      position: absolute;
+      -webkit-transition-duration: 0.2s;
+      transition-duration: 0.2s;
+      -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      visibility: hidden;
+      width: 10px;
+    }
+
+    .mdl-select.is-focused .mdl-select__label:after {
+      left: 0;
+      visibility: visible;
+      width: 100%; 
+    }
+
+    .mdl-select.is-invalid .mdl-select__label:after {
+      background-color: rgb(222, 50, 38); 
+    }
+
+    .mdl-select__error {
+      color: rgb(222, 50, 38);
+      position: absolute;
+      font-size: 12px;
+      margin-top: 3px;
+      visibility: hidden;
+    }
+
+    .mdl-select.is-invalid .mdl-select__error {
+      visibility: visible;
+    }
+
+    .mdl-select__expandable-holder {
+      display: inline-block;
+      position: relative;
+      margin-left: 32px;
+      -webkit-transition-duration: 0.2s;
+      transition-duration: 0.2s;
+      -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-block;
+      max-width: 0.1px; 
+    }
+
+    .mdl-select.is-focused .mdl-select__expandable-holder, .mdl-select.is-dirty .mdl-select__expandable-holder {
+      max-width: 600px; 
+    }
+
+    .mdl-select__expandable-holder .mdl-select__label:after {
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+      <main class="mdl-layout__content">
+        <div class="mdl-card mdl-shadow--8dp">
+          <div class="mdl-card__title mdl-color--green mdl-color-text--white">
+            <h2 class="mdl-card__title-text">Car Registration</h2>
+          </div>
+          <div class="content-grid mdl-grid">
+
+            <div class="mdl-cell">
+              <div id="car">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="model mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" >
+                  <label class="mdl-textfield__label" for="carmodel">Car model</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="price-by-day mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+                  <label class="mdl-textfield__label" for="priceday">Price by day</label>
+                  <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="price-by-km mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+                  <label class="mdl-textfield__label" for="pricekm">Price by km</label>
+                  <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell">
+
+              <div id="rental">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="begin mdl-textfield__input" type="text"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
+                  <label class="mdl-textfield__label" for="begin">Rental begin date</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="end mdl-textfield__input" type="text"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
+                  <label class="mdl-textfield__label" for="end">Rental end date</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="distance mdl-textfield__input" type="text"  pattern="-?[0-9]*(\.[0-9]+)?">
+                  <label class="mdl-textfield__label" for="distance">Distance in km</label>
+                </div>
+
+
+                <div class="mdl-select mdl-js-select mdl-select--floating-label">
+                  <select class="mdl-select__input" id="option" name="option">
+                    <option value=""></option>
+                    <option value="option1">True</option>
+                    <option value="option2">False</option>
+                  </select>
+                  <label class="mdl-select__label" for="option">Deductible option</label>
+                </div>  
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="compute">Compute</button>
+          </div>
+        </main>
+      </div>
+    </center>
+    <div align="right">
+      <main class="mdl-layout__content">
+        <div class="mdl-card mdl-shadow--8dp">
+          <div class="mdl-card__title mdl-color--green mdl-color-text--white">
+            <h2 class="mdl-card__title-text">Summary</h2>
+          </div>
+          <div id="actors"></div>
+          <script id="template" type="x-tmpl-mustache"rk>
+            {{#actors}}
+            <div class="actor">
+              <span class="mdl-layout__content">{{who}}</span>
+              <span class="mdl-layout__content">{{type}}</span>
+              <span class="mdl-layout__content">{{amount}}</span>
+            </div>
+            {{/actors}}
+          </script>
         </div>
-      {{/actors}}
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
-    <script src="drivy.js"></script>
-    <script src="index.js"></script>
-  </body>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+  <script src="drivy.js"></script>
+  <script src="index.js"></script>
+</body>
 </html>
