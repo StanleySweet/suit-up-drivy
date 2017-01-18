@@ -74,19 +74,47 @@
           <div class="mdl-card__title mdl-color--green mdl-color-text--white">
             <h2 class="mdl-card__title-text">Summary</h2>
           </div>
-          <div id="actors">
-            <script id="template" type="x-tmpl-mustache"rk>
+          <table class ="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="actors">
+           <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Material</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+        </table>
+        <script id="template" type="x-tmpl-mustache">
+        <table class ="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="actors">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">Material</th>
+                <th>Type</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
               {{#actors}}
-              <div class="actor mdl-list__item>
-                <span class="mdl-list__item-primary-content">{{who}} {{type}} {{amount}}</span>
-              </div>
+              <tr>
+                <td>
+                  <span class"mdl-list__item-primary-content">{{who}}</span>
+                </td>
+                <td>
+                  <span class"mdl-list__item-primary-content">{{type}}</span>
+                </td>
+                <td>
+                  <span class"mdl-list__item-primary-content">{{amount}}&nbsp;€</span>
+                </td>
+              </tr>
               {{/actors}}
-            </script>
-          </div>
-        </div>
-      </div>
-    </center>
-  </main>
+            </tbody>
+          </table> 
+        </script> 
+
+      </div>        
+    </div>
+  </div>
+</center>
+</main>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>

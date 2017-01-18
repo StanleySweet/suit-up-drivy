@@ -2,6 +2,9 @@
 	margin:1rem;
 	border-radius: 0.4rem;
 }
+#actors{
+	margin:1rem;
+}
 
 .mdl-cell {
 	min-width: 130px;
