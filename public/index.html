@@ -8,87 +8,87 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <center>
-    <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+
+  <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+    <center>
       <main class="mdl-layout__content">
-        <div class="mdl-card mdl-shadow--8dp">
-          <div class="mdl-card__title mdl-color--green mdl-color-text--white">
-            <h2 class="mdl-card__title-text">Car Registration</h2>
-          </div>
-          <div class="content-grid mdl-grid">
+        <div class="mdl-grid center-items">
+          <div class="mdl-card mdl-shadow--8dp">
+            <div class="mdl-card__title mdl-color--green mdl-color-text--white">
+              <h2 class="mdl-card__title-text">Car Registration</h2>
+            </div>
 
-            <div class="mdl-cell">
-              <div id="car">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="model mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" >
-                  <label class="mdl-textfield__label" for="carmodel">Car model</label>
-                </div>
+            <div class="content-grid mdl-grid">
+              <div class="mdl-cell">
+                <div id="car">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="model mdl-textfield__input" type="text" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" >
+                    <label class="mdl-textfield__label" for="carmodel">Car model</label>
+                  </div>
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="price-by-day mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
-                  <label class="mdl-textfield__label" for="priceday">Price by day</label>
-                  <span class="mdl-textfield__error">Input is not a number!</span>
-                </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="price-by-day mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+                    <label class="mdl-textfield__label" for="priceday">Price by day</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="price-by-km mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
-                  <label class="mdl-textfield__label" for="pricekm">Price by km</label>
-                  <span class="mdl-textfield__error">Input is not a number!</span>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="price-by-km mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+                    <label class="mdl-textfield__label" for="pricekm">Price by km</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="mdl-cell">
+              <div class="mdl-cell">
 
-              <div id="rental">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="begin mdl-textfield__input" type="text"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
-                  <label class="mdl-textfield__label" for="begin">Rental begin date</label>
-                </div>
+                <div id="rental">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="begin mdl-textfield__input" type="text"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
+                    <label class="mdl-textfield__label" for="begin">Rental begin date</label>
+                  </div>
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="end mdl-textfield__input" type="text"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
-                  <label class="mdl-textfield__label" for="end">Rental end date</label>
-                </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="end mdl-textfield__input" type="text"  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
+                    <label class="mdl-textfield__label" for="end">Rental end date</label>
+                  </div>
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="distance mdl-textfield__input" type="text"  pattern="-?[0-9]*(\.[0-9]+)?">
-                  <label class="mdl-textfield__label" for="distance">Distance in km</label>
-                </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="distance mdl-textfield__input" type="text"  pattern="-?[0-9]*(\.[0-9]+)?">
+                    <label class="mdl-textfield__label" for="distance">Distance in km</label>
+                  </div>
 
 
-                <div class="mdl-select mdl-js-select mdl-select--floating-label">
-                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox2">
-                 <input type="checkbox" id="checkbox2" class="option mdl-checkbox__input">
-                  <span class="mdl-checkbox__label">Deductible Option</span>
-                </label> 
-              </div>  
-            </div>
+                  <div class="mdl-select mdl-js-select mdl-select--floating-label">
+                   <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox2">
+                     <input type="checkbox" id="checkbox2" class="option mdl-checkbox__input">
+                     <span class="mdl-checkbox__label">Deductible Option</span>
+                   </label> 
+                 </div>  
+               </div>
+             </div>
+             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="compute">Compute</button>
+           </div>
+         </div>
+
+         <div class="mdl-card mdl-shadow--8dp">
+          <div class="mdl-card__title mdl-color--green mdl-color-text--white">
+            <h2 class="mdl-card__title-text">Summary</h2>
           </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="compute">Compute</button>
-        </div>
-      </main>
-    </div>
-  </center>
-  <div align="right">
-    <main class="mdl-layout__content">
-      <div class="mdl-card mdl-shadow--8dp">
-        <div class="mdl-card__title mdl-color--green mdl-color-text--white">
-          <h2 class="mdl-card__title-text">Summary</h2>
-        </div>
-        <div id="actors"></div>
-        <script id="template" type="x-tmpl-mustache"rk>
-          {{#actors}}
-          <div class="actor">
-            <span class="mdl-layout__content">{{who}}</span>
-            <span class="mdl-layout__content">{{type}}</span>
-            <span class="mdl-layout__content">{{amount}}</span>
+          <div id="actors">
+            <script id="template" type="x-tmpl-mustache"rk>
+              {{#actors}}
+              <div class="actor mdl-list__item>
+                <span class="mdl-list__item-primary-content">{{who}} {{type}} {{amount}}</span>
+              </div>
+              {{/actors}}
+            </script>
           </div>
-          {{/actors}}
-        </script>
+        </div>
       </div>
-    </div>
+    </center>
   </main>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 <script src="drivy.js"></script>
 <script src="index.js"></script>
